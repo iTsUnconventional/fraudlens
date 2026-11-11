@@ -1,4 +1,4 @@
-'use client'
+
 
 const caseData: Record<string, {
   id: string; trsId: string; title: string; type: string; typeBg: string; typeColor: string; typeBorder: string
@@ -145,8 +145,9 @@ function RiskRing({ score }: { score: number }) {
   )
 }
 
-export default function CaseDetailPage({ params }: { params: { id: string } }) {
-  const c = caseData[params.id]
+export default async function CaseDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const c = caseData[id]
   if (!c) {
     return (
       <main id="main-content" style={{ padding: '24px 32px', maxWidth: '1400px', margin: '0 auto' }}>

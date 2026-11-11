@@ -107,8 +107,9 @@ function RiskRing({ score }: { score: number }) {
   )
 }
 
-export default function ForensicsPage({ params }: { params: { docId: string } }) {
-  const doc = docData[params.docId]
+export default async function ForensicsPage({ params }: { params: Promise<{ docId: string }> }) {
+  const { docId } = await params
+  const doc = docData[docId]
   if (!doc) {
     return (
       <main id="main-content" style={{ padding: '24px 32px', maxWidth: '1400px', margin: '0 auto' }}>
